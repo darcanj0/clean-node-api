@@ -1,11 +1,11 @@
-import { IAccountModel } from '../models/account'
+import { AccountModel } from '../models/account'
 
-export interface IAddAccountModel {
+export interface AddAccountModel {
   name: string
   email: string
   password: string
 }
 
 export interface IAddAccount {
-  add: (account: IAddAccountModel) => IAccountModel
+  add: (account: AddAccountModel) => Promise<AccountModel>
 }
