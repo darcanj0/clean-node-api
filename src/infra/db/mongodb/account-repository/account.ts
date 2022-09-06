@@ -10,11 +10,6 @@ export class AccountMongoRepository implements IAddAccountRepository {
 
     // coleta o insertedId numa variável 'id'
     const { insertedId: id } = result
-    const accountById = await accountCollection.findOne({ _id: id })
-
-    // _id é desconstruído e armazenado numa variável homônima
-    // 'accountWithoutId' é um objetos com todos os atributos de 'accountById', exceto o _id, que virou variável
-    const { _id, ...accountWithoutId } = accountById
-    return Object.assign({}, accountWithoutId, { id: _id.toHexString() }) as AccountModel
+    return MongoHelper.map(await accountCollection.findOne({ _id: id }))
   }
 }
