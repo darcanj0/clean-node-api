@@ -24,7 +24,7 @@ const makeSut = (): ISutTypes => {
 }
 
 describe('Controller Decorator', () => {
-  test('Should call controller handle method', async () => {
+  test('Should call controller handle method with correct value', async () => {
     const { controllerStub, sut } = makeSut()
 
     const handleSpy = jest.spyOn(controllerStub, 'handle')
