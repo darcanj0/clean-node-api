@@ -1,10 +1,11 @@
 import request from 'supertest'
 import app from '../config/app'
+import env from '../config/env'
 import { MongoHelper } from '../../infra/db/mongodb/helpers/mongo-helper'
 
 describe('Signup Routes', () => {
   beforeAll(async () => {
-    await MongoHelper.connect(process.env.MONGO_URL || '')
+    await MongoHelper.connect(env.mongoUri)
   })
 
   afterAll(async () => {
@@ -21,7 +22,7 @@ describe('Signup Routes', () => {
       .post('/api/signup')
       .send({
         name: 'Daniel',
-        email: 'yapek80533@oncebar.com',
+        email: 'xorig89280@nicoimg.com',
         password: '123',
         passwordConfirmation: '123'
       })

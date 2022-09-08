@@ -1,9 +1,9 @@
 import express from 'express'
+import userRouter from '../routes/signup-routes'
 import setupMiddlewares from './middlewares'
-import setupRoutes from './routes'
 
 const app = express()
 setupMiddlewares(app)
-setupRoutes(app)
+app.use('/api', userRouter)
 
 export default app
