@@ -1,8 +1,8 @@
-import { LoginController } from './login'
+import { InvalidParamError } from '../../errors'
 import { MissingParamError } from '../../errors/missing-param-error'
 import { badRequest, serverError } from '../../helpers/http-helper'
 import { HttpRequest, IEmailValidator } from '../signup/signup-protocols'
-import { InvalidParamError, ServerError } from '../../errors'
+import { LoginController } from './login'
 
 interface SutTypes {
   sut: LoginController
@@ -74,6 +74,6 @@ describe('Login Controller', () => {
       throw new Error()
     })
     const httpResponse = await sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(serverError(new ServerError()))
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 })
