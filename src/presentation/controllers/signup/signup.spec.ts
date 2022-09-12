@@ -6,7 +6,6 @@ import { SignUpController } from './signup'
 
 interface ISutTypes {
   sut: SignUpController
-
   addAccountStub: IAddAccount
   validationStub: IValidation
 }
