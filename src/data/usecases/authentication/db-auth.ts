@@ -1,0 +1,15 @@
+import { AuthenticationModel, IAuthentication } from '../../../domain/usecases/authentication'
+import { ILoadAccountByEmailRepository } from '../../protocols/load-account-by-email-repository'
+
+export class DbAuthentication implements IAuthentication {
+  private readonly loadAccountByEmailRepository: ILoadAccountByEmailRepository
+  constructor (loadAccountByEmailRepository: ILoadAccountByEmailRepository) {
+    this.loadAccountByEmailRepository = loadAccountByEmailRepository
+  }
+
+  async auth (authentication: AuthenticationModel): Promise<string> {
+    const { email } = authentication
+    await this.loadAccountByEmailRepository.load(email)
+    return ''
+  }
+}
