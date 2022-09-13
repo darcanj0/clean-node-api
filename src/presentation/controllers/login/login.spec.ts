@@ -3,7 +3,7 @@ import { MissingParamError, ServerError } from '../../errors'
 import { badRequest, ok, serverError } from '../../helpers/http/http-helper'
 import { HttpRequest } from '../../protocols/http'
 import { LoginController } from './login'
-import { IAuthentication } from './login-protocols'
+import { AuthenticationModel, IAuthentication } from './login-protocols'
 
 interface ISutTypes {
   sut: LoginController
@@ -22,7 +22,7 @@ const makeValidation = (): IValidation => {
 
 const makeAuthentication = (): IAuthentication => {
   class AuthenticationStub implements IAuthentication {
-    async auth (email: string, password: string): Promise<string> {
+    async auth (authentication: AuthenticationModel): Promise<string> {
       return new Promise(resolve => resolve('any_token'))
     }
   }
@@ -56,8 +56,10 @@ describe('LoginController', () => {
     const httpRequest = makeFakeRequest()
     await sut.handle(httpRequest)
     expect(addSpy).toHaveBeenCalledWith(
-      'any_email@mail.com',
-      'any_password'
+      {
+        email: 'any_email@mail.com',
+        password: 'any_password'
+      }
     )
   })
 
