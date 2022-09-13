@@ -1,7 +1,7 @@
 import { HttpRequest, HttpResponse, IController } from '../../presentation/protocols'
 import { LogControllerDecorator } from './log'
 import { ILogErrorRepository } from '../../data/protocols/log-error-repository'
-import { serverError, ok } from '../../presentation/helpers/http-helper'
+import { serverError, ok } from '../../presentation/helpers/http/http-helper'
 import { AccountModel } from '../../domain/models/account'
 
 interface ISutTypes {
