@@ -2,13 +2,7 @@ import { HttpRequest, HttpResponse, IAddAccount, IController, IValidation } from
 import { badRequest, ok, serverError } from '../../helpers/http/http-helper'
 
 export class SignUpController implements IController {
-  private readonly addAccount: IAddAccount
-  private readonly validation: IValidation
-
-  constructor (addAccount: IAddAccount, validation: IValidation) {
-    this.addAccount = addAccount
-    this.validation = validation
-  }
+  constructor (private readonly addAccount: IAddAccount, private readonly validation: IValidation) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {

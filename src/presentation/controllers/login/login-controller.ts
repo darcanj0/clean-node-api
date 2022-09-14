@@ -3,13 +3,7 @@ import { IValidation } from '../signup/signup-controller-protocols'
 import { HttpRequest, HttpResponse, IAuthentication, IController } from './login-controller-protocols'
 
 export class LoginController implements IController {
-  private readonly validation: IValidation
-  private readonly authenticator: IAuthentication
-
-  constructor (authenticator: IAuthentication, validation: IValidation) {
-    this.validation = validation
-    this.authenticator = authenticator
-  }
+  constructor (private readonly authenticator: IAuthentication, private readonly validation: IValidation) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
