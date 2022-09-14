@@ -1,5 +1,5 @@
 import express from 'express'
-import userRouter from '../routes/signup-routes'
+import userRouter from '../routes/user-routes'
 import setupMiddlewares from './middlewares'
 
 const app = express()

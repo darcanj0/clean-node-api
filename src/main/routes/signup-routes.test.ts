@@ -3,7 +3,7 @@ import app from '../config/app'
 import env from '../config/env'
 import { MongoHelper } from '../../infra/db/mongodb/helpers/mongo-helper'
 
-describe('Signup Routes', () => {
+describe('Signup Route', () => {
   beforeAll(async () => {
     await MongoHelper.connect(env.mongoUri)
   })
