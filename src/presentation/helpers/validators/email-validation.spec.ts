@@ -1,4 +1,4 @@
-import { IEmailValidator } from '../../controllers/signup/signup-protocols'
+import { IEmailValidator } from '../../controllers/signup/signup-controller-protocols'
 import { EmailValidation } from './email-validation'
 
 interface ISutTypes {

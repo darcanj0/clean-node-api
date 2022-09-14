@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { adaptRoute } from '../adapters/express-route-adapter'
-import { makeSignUpController } from '../factories/signup/signup'
+import { makeSignUpController } from '../factories/signup/signup-factory'
 
 const userRouter = Router()
 
