@@ -14,7 +14,7 @@
     "test:staged": "npm test -- --findRelatedTests",
     "test:ci": "npm test -- --coverage",
     "mongo": "mongosh",
-    "up": "npm run build && docker-compose up -d",
+    "up": "npm run build && docker-compose up",
     "down": "docker-compose down",
     "debug": "node --inspect=0.0.0.0:9222 --no-lazy dist/main/server.js"
   },
