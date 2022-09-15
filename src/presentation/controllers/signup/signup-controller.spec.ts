@@ -2,12 +2,14 @@ import { AccountModel, AddAccountModel, IAddAccount, IValidation } from '../../c
 import { MissingParamError, ServerError } from '../../errors'
 import { badRequest, ok, serverError } from '../../helpers/http/http-helper'
 import { HttpRequest } from '../../protocols/http'
+import { AuthenticationModel, IAuthentication } from '../login/login-controller-protocols'
 import { SignUpController } from './signup-controller'
 
 interface ISutTypes {
   sut: SignUpController
   addAccountStub: IAddAccount
   validationStub: IValidation
+  authenticationStub: IAuthentication
 }
 
 const makeValidation = (): IValidation => {
@@ -29,12 +31,22 @@ const makeAddAccount = (): IAddAccount => {
   return new AddAccountStub()
 }
 
+const makeAuthentication = (): IAuthentication => {
+  class AuthenticationStub implements IAuthentication {
+    async auth (authentication: AuthenticationModel): Promise<string> {
+      return new Promise(resolve => resolve('any_token'))
+    }
+  }
+  return new AuthenticationStub()
+}
+
 const makeSut = (): ISutTypes => {
   const addAccountStub = makeAddAccount()
   const validationStub = makeValidation()
-  const sut = new SignUpController(addAccountStub, validationStub)
+  const authenticationStub = makeAuthentication()
+  const sut = new SignUpController(addAccountStub, validationStub, authenticationStub)
   return {
-    sut, addAccountStub, validationStub
+    sut, addAccountStub, validationStub, authenticationStub
   }
 }
 
@@ -98,5 +110,18 @@ describe('SignUp Controller', () => {
     const httpRequest = makeFakeRequest()
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(badRequest(new MissingParamError('any_field')))
+  })
+
+  test('Should call Authentication with correct values', async () => {
+    const { sut, authenticationStub } = makeSut()
+    const addSpy = jest.spyOn(authenticationStub, 'auth')
+    const httpRequest = makeFakeRequest()
+    await sut.handle(httpRequest)
+    expect(addSpy).toHaveBeenCalledWith(
+      {
+        email: 'any_email@mail.com',
+        password: 'any_password'
+      }
+    )
   })
 })
