@@ -1,9 +1,10 @@
 import { HttpRequest, HttpResponse } from '../../../protocols'
-import { badRequest, IController, IValidation } from './create-survey-controller-protocols'
+import { badRequest, IController, IValidation, ICreateSurvey } from './create-survey-controller-protocols'
 
 export class CreateSurveyController implements IController {
   constructor (
-    private readonly validation: IValidation
+    private readonly validation: IValidation,
+    private readonly createSurvey: ICreateSurvey
   ) {}
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
@@ -11,6 +12,7 @@ export class CreateSurveyController implements IController {
     if (error !== null) {
       return badRequest(error)
     }
+    await this.createSurvey.create(httpRequest.body)
     return null
   }
 }
