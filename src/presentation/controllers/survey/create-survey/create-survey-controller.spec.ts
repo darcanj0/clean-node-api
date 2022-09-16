@@ -1,7 +1,7 @@
 import { InvalidParamError } from '../../../errors'
 import { HttpRequest, HttpResponse } from '../../../protocols/http'
 import { CreateSurveyController } from './create-survey-controller'
-import { badRequest, serverError, CreateSurveyData, ICreateSurvey, IValidation } from './create-survey-controller-protocols'
+import { badRequest, serverError, noContent, CreateSurveyData, ICreateSurvey, IValidation } from './create-survey-controller-protocols'
 
 const makeFakeHttpRequest = (): HttpRequest => ({
   body: {
@@ -83,5 +83,12 @@ describe('CreateSurveyController', () => {
     const httpRequest = makeFakeHttpRequest()
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('Should return 204 if valid data is provided', async () => {
+    const { sut } = makeSut()
+    const httpRequest = makeFakeHttpRequest()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(noContent())
   })
 })
