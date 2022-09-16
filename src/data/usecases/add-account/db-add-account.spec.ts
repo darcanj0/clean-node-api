@@ -1,6 +1,5 @@
-import { ILoadAccountByEmailRepository } from '../../protocols/db/account/load-account-by-email-repository'
 import { DbAddAccount } from '../add-account/db-add-account'
-import { AccountModel, AddAccountModel, IHasher, IAddAccountRepository } from './db-add-account-protocols'
+import { AccountModel, AddAccountModel, IHasher, IAddAccountRepository, ILoadAccountByEmailRepository } from './db-add-account-protocols'
 
 interface ISutTypes {
   sut: DbAddAccount

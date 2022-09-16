@@ -1,5 +1,4 @@
-import { ILoadAccountByEmailRepository } from '../../protocols/db/account/load-account-by-email-repository'
-import { AccountModel, AddAccountModel, IAddAccount, IHasher, IAddAccountRepository } from './db-add-account-protocols'
+import { AccountModel, AddAccountModel, IAddAccount, IHasher, IAddAccountRepository, ILoadAccountByEmailRepository } from './db-add-account-protocols'
 
 export class DbAddAccount implements IAddAccount {
   constructor (
