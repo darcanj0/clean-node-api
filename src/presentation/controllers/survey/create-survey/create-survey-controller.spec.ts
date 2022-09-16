@@ -1,7 +1,7 @@
 import { InvalidParamError } from '../../../errors'
 import { HttpRequest, HttpResponse } from '../../../protocols/http'
 import { CreateSurveyController } from './create-survey-controller'
-import { IValidation, badRequest, CreateSurveyData, ICreateSurvey } from './create-survey-controller-protocols'
+import { badRequest, serverError, CreateSurveyData, ICreateSurvey, IValidation } from './create-survey-controller-protocols'
 
 const makeFakeHttpRequest = (): HttpRequest => ({
   body: {
@@ -25,7 +25,7 @@ const makeValidationStub = (): IValidation => {
 const makeCreateSurveyStub = (): ICreateSurvey => {
   class CreateSurveyStub implements ICreateSurvey {
     async create (createSurveyData: CreateSurveyData): Promise<any> {
-      return {}
+      return new Promise(resolve => resolve({}))
     }
   }
   return new CreateSurveyStub()
@@ -73,5 +73,15 @@ describe('CreateSurveyController', () => {
         answer: 'any_answer'
       }]
     })
+  })
+
+  test('Should return 500 if CreateSurvey throws', async () => {
+    const { sut, createSurveyStub } = makeSut()
+    jest.spyOn(createSurveyStub, 'create').mockReturnValueOnce(
+      new Promise((resolve, reject) => reject(new Error()))
+    )
+    const httpRequest = makeFakeHttpRequest()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 })
