@@ -4,7 +4,8 @@ import { IAuthentication } from '../login/login-controller-protocols'
 import { EmailInUseError } from '../../errors'
 
 export class SignUpController implements IController {
-  constructor (private readonly addAccount: IAddAccount,
+  constructor (
+    private readonly addAccount: IAddAccount,
     private readonly validation: IValidation,
     private readonly authentication: IAuthentication) {}
 
