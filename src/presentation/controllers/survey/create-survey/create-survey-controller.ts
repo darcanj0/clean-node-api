@@ -1,5 +1,5 @@
 import { HttpRequest, HttpResponse } from '../../../protocols'
-import { badRequest, serverError, IController, IValidation, ICreateSurvey } from './create-survey-controller-protocols'
+import { badRequest, serverError, noContent, IController, IValidation, ICreateSurvey } from './create-survey-controller-protocols'
 
 export class CreateSurveyController implements IController {
   constructor (
@@ -14,7 +14,7 @@ export class CreateSurveyController implements IController {
         return badRequest(error)
       }
       await this.createSurvey.create(httpRequest.body)
-      return null
+      return noContent()
     } catch (error) {
       return serverError(error)
     }
