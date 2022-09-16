@@ -1,7 +1,7 @@
-import { EmailValidation, RequiredFieldValidation, ValidationComposite } from '../../../../presentation/helpers/validators'
+import { EmailValidation, RequiredFieldValidation, ValidationComposite } from '../../../../validation/validators'
 import { IValidation } from '../../../../presentation/protocols/validation'
-import { IEmailValidator } from '../../../../presentation/protocols/email-validator'
-import { EmailValidatorAdapter } from '../../../adapters/validators/email-validator-adapter'
+import { IEmailValidator } from '../../../../validation/protocols/email-validator'
+import { EmailValidatorAdapter } from '../../../../infra/adapters/validators/email-validator-adapter'
 
 const makeEmailValidator = (): IEmailValidator => {
   return new EmailValidatorAdapter()
