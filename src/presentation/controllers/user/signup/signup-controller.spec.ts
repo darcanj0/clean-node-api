@@ -1,7 +1,7 @@
-import { AccountModel, AddAccountModel, IAddAccount, IValidation } from '../../controllers/signup/signup-controller-protocols'
-import { EmailInUseError, MissingParamError, ServerError } from '../../errors'
-import { badRequest, forbidden, ok, serverError } from '../../helpers/http/http-helper'
-import { HttpRequest } from '../../protocols/http'
+import { AccountModel, AddAccountModel, IAddAccount, IValidation } from '../../../controllers/user/signup/signup-controller-protocols'
+import { EmailInUseError, MissingParamError, ServerError } from '../../../errors'
+import { badRequest, forbidden, ok, serverError } from '../../../helpers/http/http-helper'
+import { HttpRequest } from '../../../protocols/http'
 import { AuthenticationModel, IAuthentication } from '../login/login-controller-protocols'
 import { SignUpController } from './signup-controller'
 

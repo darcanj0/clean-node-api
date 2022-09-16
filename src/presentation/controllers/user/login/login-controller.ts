@@ -1,4 +1,4 @@
-import { badRequest, ok, serverError, unauthorized } from '../../helpers/http/http-helper'
+import { badRequest, ok, serverError, unauthorized } from '../../../helpers/http/http-helper'
 import { IValidation } from '../signup/signup-controller-protocols'
 import { HttpRequest, HttpResponse, IAuthentication, IController } from './login-controller-protocols'
 

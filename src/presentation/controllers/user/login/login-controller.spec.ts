@@ -1,7 +1,7 @@
 import { IValidation } from '../signup/signup-controller-protocols'
-import { MissingParamError, ServerError } from '../../errors'
-import { badRequest, ok, serverError } from '../../helpers/http/http-helper'
-import { HttpRequest } from '../../protocols/http'
+import { MissingParamError, ServerError } from '../../../errors'
+import { badRequest, ok, serverError } from '../../../helpers/http/http-helper'
+import { HttpRequest } from '../../../protocols/http'
 import { LoginController } from './login-controller'
 import { AuthenticationModel, IAuthentication } from './login-controller-protocols'
 
