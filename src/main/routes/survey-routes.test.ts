@@ -3,7 +3,7 @@ import app from '../config/app'
 import env from '../config/env'
 import { MongoHelper } from '../../infra/db/mongodb/helpers/mongo-helper'
 
-describe('Signup Route', () => {
+describe('CreateSurvey Route', () => {
   beforeAll(async () => {
     await MongoHelper.connect(env.mongoUri)
   })
@@ -13,19 +13,20 @@ describe('Signup Route', () => {
   })
 
   beforeEach(async () => {
-    const accountCollection = await MongoHelper.getCollection('accounts')
+    const accountCollection = await MongoHelper.getCollection('surveys')
     await accountCollection.deleteMany({})
   })
 
-  test('Should return an account on success', async () => {
+  test('Should return 204 on success', async () => {
     await request(app)
-      .post('/user/signup')
+      .post('/survey')
       .send({
-        name: 'Daniel',
-        email: 'xorig89280@nicoimg.com',
-        password: '123',
-        passwordConfirmation: '123'
+        question: 'any_question',
+        answers: [
+          { answer: 'any_answer', image: 'any_image' },
+          { answer: 'any_answer' }
+        ]
       })
-      .expect(200)
+      .expect(204)
   })
 })

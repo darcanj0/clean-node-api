@@ -29,7 +29,7 @@ describe('Login Route', () => {
       password
     })
     await request(app)
-      .post('/api/login')
+      .post('/user/login')
       .send({
         email: 'xorig89280@nicoimg.com',
         password: '123'
@@ -39,7 +39,7 @@ describe('Login Route', () => {
 
   test('Should return 401 on fail', async () => {
     await request(app)
-      .post('/api/login')
+      .post('/user/login')
       .send({
         email: 'xorig89280@nicoimg.com',
         password: '123'
