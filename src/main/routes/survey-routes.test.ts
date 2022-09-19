@@ -17,7 +17,7 @@ describe('CreateSurvey Route', () => {
     await accountCollection.deleteMany({})
   })
 
-  test('Should return 204 on success', async () => {
+  test('Should return 403 on unsent accessToken in headers', async () => {
     await request(app)
       .post('/survey')
       .send({
@@ -27,6 +27,6 @@ describe('CreateSurvey Route', () => {
           { answer: 'any_answer' }
         ]
       })
-      .expect(204)
+      .expect(403)
   })
 })
