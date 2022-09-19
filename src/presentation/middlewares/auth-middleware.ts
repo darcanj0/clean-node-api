@@ -17,7 +17,8 @@ export class AuthMiddleware implements IMiddleware {
 
   async handle (httpRequest: HttpRequest): Promise <HttpResponse> {
     try {
-      const accessToken = httpRequest.headers?.['x-access-token']
+      const { headers } = httpRequest
+      const accessToken = headers?.['x-access-token']
       if (accessToken) {
         const account = await this.loadAccountByToken.load(accessToken, this.role)
         if (account) {
