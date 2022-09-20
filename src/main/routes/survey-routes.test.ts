@@ -76,5 +76,21 @@ describe('CreateSurvey Route', () => {
         })
         .expect(403)
     })
+
+    test('Should return 204 if valid accessToken in headers', async () => {
+      const { insertedId } = await accountCollection.insertOne({
+        name: 'Daniel',
+        email: 'xorig89280@nicoimg.com',
+        password: '123'
+      })
+      const id = insertedId.toJSON()
+      const accessToken = sign(id, env.jwtSecret)
+      await accountCollection.updateOne({ _id: insertedId },
+        { $set: { accessToken } })
+      await request(app)
+        .get('/survey')
+        .set('x-access-token', accessToken)
+        .expect(204)
+    })
   })
 })
