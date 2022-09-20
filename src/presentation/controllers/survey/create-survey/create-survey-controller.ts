@@ -13,7 +13,7 @@ export class CreateSurveyController implements IController {
       if (error !== null) {
         return badRequest(error)
       }
-      await this.createSurvey.create(httpRequest.body)
+      await this.createSurvey.create({ ...httpRequest.body, date: new Date() })
       return noContent()
     } catch (error) {
       return serverError(error)
