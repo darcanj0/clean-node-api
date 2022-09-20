@@ -64,4 +64,10 @@ describe('LoadSurveysUseCase', () => {
     const promise = sut.loadSurveys()
     await expect(promise).rejects.toThrow()
   })
+
+  test('Should return surveys on success', async () => {
+    const { sut } = makeSut()
+    const surveys = await sut.loadSurveys()
+    expect(surveys).toEqual(makeFakeSurveys())
+  })
 })
