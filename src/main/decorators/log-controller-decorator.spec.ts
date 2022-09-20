@@ -4,7 +4,7 @@ import { ILogErrorRepository } from '../../data/protocols/db/log/log-error-repos
 import { serverError, ok } from '../../presentation/helpers/http/http-helper'
 import { AccountModel } from '../../domain/models/account'
 
-interface ISutTypes {
+type ISutTypes = {
   controllerStub: IController
   sut: LogControllerDecorator
   logErrorRepositoryStub: ILogErrorRepository

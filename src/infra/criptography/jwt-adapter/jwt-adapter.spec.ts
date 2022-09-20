@@ -13,7 +13,7 @@ jest.mock('jsonwebtoken', () => ({
 
 const secret = 'any_secret'
 
-interface SutTypes {
+type SutTypes = {
   sut: JwtAdapter
 }
 

@@ -20,7 +20,7 @@ const makeCreateSurveyRepositoryStub = (): ICreateSurveyRepository => {
   return new CreateSurveyRepositoryStub()
 }
 
-interface SutTypes {
+type SutTypes = {
   createSurveyRepositoryStub: ICreateSurveyRepository
   sut: DbCreateSurvey
 }

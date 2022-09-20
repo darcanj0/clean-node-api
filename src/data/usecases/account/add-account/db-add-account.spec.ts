@@ -1,7 +1,7 @@
 import { DbAddAccount } from '../add-account/db-add-account'
 import { AccountModel, AddAccountModel, IHasher, IAddAccountRepository, ILoadAccountByEmailRepository } from './db-add-account-protocols'
 
-interface ISutTypes {
+type ISutTypes = {
   sut: DbAddAccount
   hasherStub: IHasher
   addAccountRepositoryStub: IAddAccountRepository

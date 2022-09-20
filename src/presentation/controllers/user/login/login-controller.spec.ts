@@ -5,7 +5,7 @@ import { HttpRequest } from '../../../protocols/http'
 import { LoginController } from './login-controller'
 import { AuthenticationModel, IAuthentication } from './login-controller-protocols'
 
-interface ISutTypes {
+type ISutTypes = {
   sut: LoginController
   authenticationStub: IAuthentication
   validationStub: IValidation

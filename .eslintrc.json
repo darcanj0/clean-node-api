@@ -10,6 +10,7 @@
       "@typescript-eslint/no-misused-promises": "off",
       "@typescript-eslint/no-invalid-void-type": "off",
       "no-return-assign": "off",
-      "@typescript-eslint/return-await": "off"
+      "@typescript-eslint/return-await": "off",
+      "@typescript-eslint/consistent-type-definitions": "off"
     }
 }

@@ -1,6 +1,6 @@
 import { SurveyAnswer } from '../usecases/survey/create-survey'
 
-export interface SurveyModel {
+export type SurveyModel = {
   id: string
   question: string
   answers: SurveyAnswer[]
