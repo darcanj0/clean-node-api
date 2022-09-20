@@ -1,6 +1,5 @@
-import { AccountModel } from '../../../domain/models/account'
 import { DbLoadAccountByToken } from './db-load-account-by-token'
-import { IDecrypter, ILoadAccountByTokenRepository } from './db-load-account-by-token-protocols'
+import { AccountModel, IDecrypter, ILoadAccountByTokenRepository } from './db-load-account-by-token-protocols'
 
 const makeFakeToken = (): string => 'any_token'
 const makeFakeRole = (): string => 'any_role'

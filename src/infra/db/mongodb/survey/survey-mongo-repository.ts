@@ -1,4 +1,4 @@
-import { CreateSurveyData, ICreateSurveyRepository } from '../../../../data/usecases/survey/db-create-survey-protocols'
+import { CreateSurveyData, ICreateSurveyRepository } from '../../../../data/usecases/survey/create-survey/db-create-survey-protocols'
 import { SurveyModel } from '../../../../domain/models/survey'
 import { MongoHelper } from '../helpers/mongo-helper'
 

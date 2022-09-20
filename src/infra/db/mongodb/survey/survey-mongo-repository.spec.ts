@@ -1,5 +1,5 @@
 import { Collection } from 'mongodb'
-import { ICreateSurveyRepository } from '../../../../data/usecases/survey/db-create-survey-protocols'
+import { ICreateSurveyRepository } from '../../../../data/usecases/survey/create-survey/db-create-survey-protocols'
 import { CreateSurveyData } from '../../../../domain/usecases/survey/create-survey'
 import { MongoHelper } from '../helpers/mongo-helper'
 import { SurveyMongoRepository } from './survey-mongo-repository'
