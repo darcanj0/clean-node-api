@@ -3,5 +3,6 @@ import { SurveyAnswer } from '../usecases/survey/create-survey'
 export interface SurveyModel {
   id: string
   question: string
-  answers: SurveyAnswer
+  answers: SurveyAnswer[]
+  date: Date
 }
