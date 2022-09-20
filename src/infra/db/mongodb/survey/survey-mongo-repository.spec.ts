@@ -3,6 +3,7 @@ import { ICreateSurveyRepository } from '../../../../data/usecases/survey/db-cre
 import { CreateSurveyData } from '../../../../domain/usecases/survey/create-survey'
 import { MongoHelper } from '../helpers/mongo-helper'
 import { SurveyMongoRepository } from './survey-mongo-repository'
+import MockDate from 'mockdate'
 
 const makeSut = (): ICreateSurveyRepository => {
   return new SurveyMongoRepository()
@@ -10,7 +11,8 @@ const makeSut = (): ICreateSurveyRepository => {
 
 const makeFakeSurveyData = (): CreateSurveyData => ({
   question: 'any_question',
-  answers: [{ image: 'any_image', answer: 'any_answer' }]
+  answers: [{ image: 'any_image', answer: 'any_answer' }],
+  date: new Date()
 })
 
 let surveyCollection: Collection
@@ -18,10 +20,12 @@ let surveyCollection: Collection
 describe('SurveyMongoRepository', () => {
   beforeAll(async () => {
     await MongoHelper.connect(process.env.MONGO_URL || '')
+    MockDate.set(new Date())
   })
 
   afterAll(async () => {
     await MongoHelper.disconnect()
+    MockDate.reset()
   })
 
   beforeEach(async () => {

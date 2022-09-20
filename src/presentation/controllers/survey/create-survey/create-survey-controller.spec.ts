@@ -2,6 +2,7 @@ import { InvalidParamError } from '../../../errors'
 import { HttpRequest, HttpResponse } from '../../../protocols/http'
 import { CreateSurveyController } from './create-survey-controller'
 import { badRequest, serverError, noContent, CreateSurveyData, ICreateSurvey, IValidation } from './create-survey-controller-protocols'
+import MockDate from 'mockdate'
 
 const makeFakeHttpRequest = (): HttpRequest => ({
   body: {
@@ -9,7 +10,8 @@ const makeFakeHttpRequest = (): HttpRequest => ({
     answers: [{
       image: 'any_image',
       answer: 'any_answer'
-    }]
+    }],
+    date: new Date()
   }
 })
 
@@ -45,6 +47,14 @@ const makeSut = (): SutTypes => {
 }
 
 describe('CreateSurveyController', () => {
+  beforeAll(() => {
+    MockDate.set(new Date())
+  })
+
+  afterAll(() => {
+    MockDate.reset()
+  })
+
   test('Should call Validation with correct values ', async () => {
     const { sut, validationStub } = makeSut()
     const validationSpy = jest.spyOn(validationStub, 'validate')
@@ -71,7 +81,8 @@ describe('CreateSurveyController', () => {
       answers: [{
         image: 'any_image',
         answer: 'any_answer'
-      }]
+      }],
+      date: new Date()
     })
   })
 
