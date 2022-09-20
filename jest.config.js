@@ -1,10 +1,12 @@
 module.exports = {
   clearMocks: true,
   collectCoverageFrom: [
-    '<rootDir>/src/presentation/controllers/*Controller.ts',
-    '<rootDir>/src/presentation/utils/*.ts',
-    '<rootDir>/src/data/useCases/**/*UseCase.ts',
-    '!<rootDir>/src/main/**'
+    '<rootDir>/src/**',
+    '!<rootDir>/src/main/server.ts',
+    '!<rootDir>/src/main/config/env.ts',
+    '!<rootDir>/src/**/*protocols.ts',
+    '!<rootDir>/src/infra/adapters/**',
+    '!<rootDir>/src/validation/validators/email-validation.ts'
   ],
   coverageDirectory: 'coverage',
   roots: ['<rootDir>/src'],
