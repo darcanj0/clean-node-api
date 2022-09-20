@@ -1,7 +1,7 @@
 import MockDate from 'mockdate'
 import { HttpRequest } from '../../../protocols/http'
 import { LoadSurveysController } from './load-surveys-controller'
-import { ILoadSurveys, ok, serverError, SurveyModel } from './load-surveys-controller-protocols'
+import { ILoadSurveys, ok, serverError, noContent, SurveyModel } from './load-surveys-controller-protocols'
 
 const makeFakeHttpRequest = (): HttpRequest => ({
   body: {}
@@ -79,5 +79,15 @@ describe('LoadSurveysController', () => {
     const httpRequest = makeFakeHttpRequest()
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(ok(makeFakeSurveys()))
+  })
+
+  test('Should return 204 if there are no surveys', async () => {
+    const { sut, loadSurveysStub } = makeSut()
+    jest.spyOn(loadSurveysStub, 'loadSurveys').mockReturnValueOnce(
+      new Promise((resolve) => resolve([]))
+    )
+    const httpRequest = makeFakeHttpRequest()
+    const httpResponse = await sut.handle(httpRequest)
+    expect(httpResponse).toEqual(noContent())
   })
 })
