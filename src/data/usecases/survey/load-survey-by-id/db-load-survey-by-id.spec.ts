@@ -57,9 +57,9 @@ describe('LoadSurveyByIdUseCase', () => {
     await expect(promise).rejects.toThrow()
   })
 
-  // test('Should return a survey on success', async () => {
-  //   const { sut } = makeSut()
-  //   const surveys = await sut.loadById('any_id')
-  //   expect(surveys).toEqual(makeFakeSurvey())
-  // })
+  test('Should return a survey on success', async () => {
+    const { sut } = makeSut()
+    const surveys = await sut.loadById('any_id')
+    expect(surveys).toEqual(makeFakeSurvey())
+  })
 })
