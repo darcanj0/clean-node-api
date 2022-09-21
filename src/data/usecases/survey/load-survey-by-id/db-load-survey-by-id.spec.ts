@@ -50,12 +50,12 @@ describe('LoadSurveyByIdUseCase', () => {
     expect(repoSpy).toHaveBeenCalledWith('any_id')
   })
 
-  // test('Should throw if LoadSurveyByIdRepository throws', async () => {
-  //   const { loadSurveyByIdRepositoryStub, sut } = makeSut()
-  //   jest.spyOn(loadSurveyByIdRepositoryStub, 'load').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
-  //   const promise = sut.loadById('any_id')
-  //   await expect(promise).rejects.toThrow()
-  // })
+  test('Should throw if LoadSurveyByIdRepository throws', async () => {
+    const { loadSurveyByIdRepositoryStub, sut } = makeSut()
+    jest.spyOn(loadSurveyByIdRepositoryStub, 'load').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const promise = sut.loadById('any_id')
+    await expect(promise).rejects.toThrow()
+  })
 
   // test('Should return a survey on success', async () => {
   //   const { sut } = makeSut()
