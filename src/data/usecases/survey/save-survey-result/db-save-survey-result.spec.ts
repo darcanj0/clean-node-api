@@ -53,12 +53,12 @@ describe('SaveSurveyResultUseCase', () => {
     expect(repoSpy).toHaveBeenCalledWith(makeFakeSurveyResultData())
   })
 
-  // test('Should throw if SaveSurveyResultRepository throws', async () => {
-  //   const { saveSurveyResultRepositoryStub, sut } = makeSut()
-  //   jest.spyOn(saveSurveyResultRepositoryStub, 'save').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
-  //   const promise = sut.save(makeFakeSurveyResult())
-  //   await expect(promise).rejects.toThrow()
-  // })
+  test('Should throw if SaveSurveyResultRepository throws', async () => {
+    const { saveSurveyResultRepositoryStub, sut } = makeSut()
+    jest.spyOn(saveSurveyResultRepositoryStub, 'save').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const promise = sut.save(makeFakeSurveyResult())
+    await expect(promise).rejects.toThrow()
+  })
 
   // test('Should return survey result if SaveSurveyResultRepository succeeds', async () => {
   //   const { sut } = makeSut()
