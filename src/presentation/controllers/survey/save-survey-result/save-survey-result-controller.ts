@@ -17,11 +17,16 @@ export class SaveSurveyResultController implements IController {
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
-      const survey = await this.loadSurveyById.loadById(httpRequest.params?.surveyId)
+      const { surveyId } = httpRequest.params
+      const survey = await this.loadSurveyById.loadById(surveyId)
       if (!survey) {
         return forbidden(new InvalidParamError('surveyId'))
       }
-      await this.saveSurveyResult.save(httpRequest.body)
+      const possibleAnswers = survey.answers.map((elem) => elem.answer)
+      const isValidAnswer = possibleAnswers.some((answer) => httpRequest.body.answer === answer)
+      if (!isValidAnswer) {
+        return forbidden(new InvalidParamError('answer'))
+      }
     } catch (error) {
       return serverError(error)
     }
