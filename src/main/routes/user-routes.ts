@@ -1,7 +1,7 @@
 import { Router } from 'express'
 import { adaptRoute } from '../../infra/adapters/express/express-route-adapter'
-import { makeLoginController } from '../factories/controllers/login/login-controller-factory'
-import { makeSignUpController } from '../factories/controllers/signup/signup-controller-factory'
+import { makeLoginController } from '../factories/controllers/account/login/login-controller-factory'
+import { makeSignUpController } from '../factories/controllers/account/signup/signup-controller-factory'
 
 const userRouter = Router()
 

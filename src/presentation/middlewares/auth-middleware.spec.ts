@@ -3,7 +3,7 @@ import { forbidden, ok, serverError } from '../helpers/http/http-helper'
 import { AccessDeniedError } from '../errors'
 import { AuthMiddleware } from './auth-middleware'
 import { AccountModel } from '../../domain/models/account'
-import { ILoadAccountByToken } from '../../domain/usecases/load-account-by-token'
+import { ILoadAccountByToken } from '../../domain/usecases/account/load-account-by-token'
 
 const makeFakeAccount = (): AccountModel => ({
   id: 'valid_id',
