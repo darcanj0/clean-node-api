@@ -60,9 +60,9 @@ describe('SaveSurveyResultUseCase', () => {
     await expect(promise).rejects.toThrow()
   })
 
-  // test('Should return survey result if SaveSurveyResultRepository succeeds', async () => {
-  //   const { sut } = makeSut()
-  //   const surveyResult = await sut.save(makeFakeSurveyResult())
-  //   expect(surveyResult).toEqual(makeFakeSurveyResult())
-  // })
+  test('Should return survey result if SaveSurveyResultRepository succeeds', async () => {
+    const { sut } = makeSut()
+    const surveyResult = await sut.save(makeFakeSurveyResult())
+    expect(surveyResult).toEqual(makeFakeSurveyResult())
+  })
 })
