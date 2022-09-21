@@ -3,7 +3,7 @@ import { SaveSurveyResultController } from './save-survey-result-controller'
 import {
   HttpRequest, ILoadSurveyById, ISaveSurveyResult,
   SaveSurveyResultModel, SurveyModel, SurveyResultModel,
-  forbidden, InvalidParamError, serverError
+  forbidden, InvalidParamError, serverError, ok
 } from './save-survey-result-controller-protocols'
 
 const makeFakeHttpRequest = (): HttpRequest => ({
@@ -126,5 +126,11 @@ describe('SaveSurveyResultController', () => {
     )
     const httpResponse = await sut.handle(makeFakeHttpRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('Should return 200 on success', async () => {
+    const { sut } = makeSut()
+    const httpResponse = await sut.handle(makeFakeHttpRequest())
+    expect(httpResponse).toEqual(ok(makeFakeSurveyResultModel()))
   })
 })
