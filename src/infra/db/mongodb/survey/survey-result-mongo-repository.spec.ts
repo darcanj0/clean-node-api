@@ -12,7 +12,7 @@ let accountCollection: Collection
 const makeFakeSurvey = async (): Promise<SurveyModel> => {
   const surveyData = {
     question: 'any_question',
-    answers: [{ image: 'any_image', answer: 'any_answer' }],
+    answers: [{ image: 'any_image', answer: 'any_answer' }, { answer: 'another_answer' }],
     date: new Date()
   }
   const { insertedId } = await surveyCollection.insertOne(surveyData)
@@ -66,5 +66,26 @@ describe('SurveyResultMongoRepository', () => {
     expect(surveyResult).toBeTruthy()
     expect(surveyResult.id).toBeTruthy()
     expect(surveyResult.answer).toBe(answers[0].answer)
+  })
+
+  test('Should update a survey result if it exists', async () => {
+    const { id: surveyId, answers } = await makeFakeSurvey()
+    const { id: accountId } = await makeFakeAccount()
+    const { insertedId } = await surveyResultCollection.insertOne({
+      accountId,
+      surveyId,
+      date: new Date(),
+      answer: answers[0].answer
+    })
+    const sut = makeSut()
+    const surveyResult = await sut.save({
+      accountId,
+      surveyId,
+      date: new Date(),
+      answer: answers[1].answer
+    })
+    expect(surveyResult).toBeTruthy()
+    expect(surveyResult.id).toEqual(insertedId.toString())
+    expect(surveyResult.answer).toBe(answers[1].answer)
   })
 })
