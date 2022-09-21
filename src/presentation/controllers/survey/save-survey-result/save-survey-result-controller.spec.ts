@@ -8,7 +8,8 @@ import {
 
 const makeFakeHttpRequest = (): HttpRequest => ({
   params: { surveyId: 'any_survey_id' },
-  body: { answer: 'any_answer' }
+  body: { answer: 'any_answer' },
+  accountId: 'any_account_id'
 })
 
 const makeFakeSurvey = (): SurveyModel => ({
@@ -104,5 +105,17 @@ describe('SaveSurveyResultController', () => {
       }
     })
     expect(httpResponse).toEqual(forbidden(new InvalidParamError('answer')))
+  })
+
+  test('Should call SaveSurveyResult with correct value', async () => {
+    const { sut, saveSurveyResultStub } = makeSut()
+    const saveResultSpy = jest.spyOn(saveSurveyResultStub, 'save')
+    await sut.handle(makeFakeHttpRequest())
+    expect(saveResultSpy).toHaveBeenCalledWith({
+      surveyId: 'any_survey_id',
+      accountId: 'any_account_id',
+      answer: 'any_answer',
+      date: new Date()
+    })
   })
 })
