@@ -22,7 +22,7 @@ const makeAccessToken = async (): Promise<string> => {
   return accessToken
 }
 
-describe('CreateSurvey Route', () => {
+describe('Survey Routes', () => {
   beforeAll(async () => {
     await MongoHelper.connect(env.mongoUri)
   })
@@ -88,6 +88,15 @@ describe('CreateSurvey Route', () => {
         .get('/survey')
         .set('x-access-token', accessToken)
         .expect(204)
+    })
+  })
+
+  describe('PUT /survey/results/:surveyId', () => {
+    test('Should return 403 on unsent accessToken in headers', async () => {
+      await request(app)
+        .put('/survey/any_survey_id/results')
+        .send({ answer: 'any_answer' })
+        .expect(403)
     })
   })
 })
