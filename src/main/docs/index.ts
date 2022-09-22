@@ -7,6 +7,7 @@ import { errorSchema } from './schemas/error-schema'
 import { surveyAnswerSchema } from './schemas/survey-answer'
 import { surveySchema } from './schemas/survey-schema'
 import { surveysSchema } from './schemas/surveys-schema'
+import { addSurveyParamsSchema } from './schemas/add-survey-params'
 import { apiKeyAuth } from './schemas/api-key-auth-schema'
 import { badRequest } from './components/bad-request'
 import { serverError } from './components/server-error'
@@ -43,7 +44,8 @@ export default {
     error: errorSchema,
     surveyAnswer: surveyAnswerSchema,
     survey: surveySchema,
-    surveys: surveysSchema
+    surveys: surveysSchema,
+    addSurveyParams: addSurveyParamsSchema
   },
   components: {
     securitySchemes: {
