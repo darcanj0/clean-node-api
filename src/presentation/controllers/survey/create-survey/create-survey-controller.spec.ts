@@ -1,7 +1,7 @@
 import { InvalidParamError } from '../../../errors'
 import { HttpRequest, HttpResponse } from '../../../protocols/http'
 import { CreateSurveyController } from './create-survey-controller'
-import { badRequest, serverError, noContent, CreateSurveyData, ICreateSurvey, IValidation } from './create-survey-controller-protocols'
+import { badRequest, serverError, noContent, CreateSurveyParams, ICreateSurvey, IValidation } from './create-survey-controller-protocols'
 import MockDate from 'mockdate'
 
 const makeFakeHttpRequest = (): HttpRequest => ({
@@ -26,7 +26,7 @@ const makeValidationStub = (): IValidation => {
 
 const makeCreateSurveyStub = (): ICreateSurvey => {
   class CreateSurveyStub implements ICreateSurvey {
-    async create (createSurveyData: CreateSurveyData): Promise<any> {
+    async create (createSurveyData: CreateSurveyParams): Promise<any> {
       return new Promise(resolve => resolve({}))
     }
   }

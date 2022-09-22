@@ -3,7 +3,7 @@ import { MissingParamError, ServerError } from '../../../errors'
 import { badRequest, ok, serverError } from '../../../helpers/http/http-helper'
 import { HttpRequest } from '../../../protocols/http'
 import { LoginController } from './login-controller'
-import { AuthenticationModel, IAuthentication } from './login-controller-protocols'
+import { AuthenticationParams, IAuthentication } from './login-controller-protocols'
 
 type ISutTypes = {
   sut: LoginController
@@ -22,7 +22,7 @@ const makeValidation = (): IValidation => {
 
 const makeAuthentication = (): IAuthentication => {
   class AuthenticationStub implements IAuthentication {
-    async auth (authentication: AuthenticationModel): Promise<string> {
+    async auth (authentication: AuthenticationParams): Promise<string> {
       return new Promise(resolve => resolve('any_token'))
     }
   }

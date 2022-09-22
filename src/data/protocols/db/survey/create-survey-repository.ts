@@ -1,5 +1,5 @@
-import { CreateSurveyData } from '../../../../domain/usecases/survey/create-survey'
+import { CreateSurveyParams } from '../../../../domain/usecases/survey/create-survey'
 
 export interface ICreateSurveyRepository {
-  add: (data: CreateSurveyData) => Promise<any>
+  add: (data: CreateSurveyParams) => Promise<any>
 }

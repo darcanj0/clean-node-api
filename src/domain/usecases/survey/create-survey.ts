@@ -5,8 +5,8 @@ export interface SurveyAnswer {
   answer: string
 }
 
-export type CreateSurveyData = Omit<SurveyModel, 'id'>
+export type CreateSurveyParams = Omit<SurveyModel, 'id'>
 
 export interface ICreateSurvey {
-  create: (createSurveyData: CreateSurveyData) => Promise<any>
+  create: (createSurveyData: CreateSurveyParams) => Promise<any>
 }

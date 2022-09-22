@@ -2,7 +2,7 @@ import MockDate from 'mockdate'
 import { SaveSurveyResultController } from './save-survey-result-controller'
 import {
   HttpRequest, ILoadSurveyById, ISaveSurveyResult,
-  SaveSurveyResultModel, SurveyModel, SurveyResultModel,
+  SaveSurveyResultParams, SurveyModel, SurveyResultModel,
   forbidden, InvalidParamError, serverError, ok
 } from './save-survey-result-controller-protocols'
 
@@ -44,7 +44,7 @@ const makeFakeLoadSurveyById = (): ILoadSurveyById => {
 
 const makeSaveSurveyResultStub = (): ISaveSurveyResult => {
   class SaveSurveyResultStub implements ISaveSurveyResult {
-    async save (data: SaveSurveyResultModel): Promise<SurveyResultModel> {
+    async save (data: SaveSurveyResultParams): Promise<SurveyResultModel> {
       return new Promise(resolve => resolve(makeFakeSurveyResultModel()))
     }
   }
