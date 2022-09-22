@@ -1,5 +1,9 @@
+
 export const surveysPath = {
   post: {
+    security: [{
+      apiKeyAuth: []
+    }],
     tags: ['Survey'],
     summary: 'Realiza criação de uma enquete',
     requestBody: {
@@ -27,6 +31,9 @@ export const surveysPath = {
     }
   },
   get: {
+    security: [{
+      apiKeyAuth: []
+    }],
     tags: ['Survey'],
     summary: 'Lista todas as enquetes',
     responses: {

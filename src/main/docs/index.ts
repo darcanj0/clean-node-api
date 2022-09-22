@@ -6,6 +6,7 @@ import { errorSchema } from './schemas/error-schema'
 import { surveyAnswerSchema } from './schemas/survey-answer'
 import { surveySchema } from './schemas/survey-schema'
 import { surveysSchema } from './schemas/surveys-schema'
+import { apiKeyAuth } from './schemas/api-key-auth-schema'
 import { badRequest } from './components/bad-request'
 import { serverError } from './components/server-error'
 import { unauthorized } from './components/unauthorized'
@@ -41,7 +42,9 @@ export default {
     surveys: surveysSchema
   },
   components: {
-    securitySchemes: {},
+    securitySchemes: {
+      apiKeyAuth
+    },
     badRequest,
     serverError,
     unauthorized,
