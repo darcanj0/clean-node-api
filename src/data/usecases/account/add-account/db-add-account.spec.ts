@@ -1,5 +1,5 @@
 import { DbAddAccount } from '../add-account/db-add-account'
-import { AccountModel, AddAccountParams, IHasher, IAddAccountRepository, ILoadAccountByEmailRepository } from './db-add-account-protocols'
+import { AccountModel, IHasher, IAddAccountRepository, ILoadAccountByEmailRepository, IAddAccount } from './db-add-account-protocols'
 
 type ISutTypes = {
   sut: DbAddAccount
@@ -8,14 +8,14 @@ type ISutTypes = {
   loadAccountByEmailRepositoryStub: ILoadAccountByEmailRepository
 }
 
-const makeFakeAccount = (): AccountModel => ({
+const makeFakeAccount = (): IAddAccount.Result => ({
   id: 'valid_id',
   name: 'valid_name',
   email: 'valid_email',
   password: 'hashed_password'
 })
 
-const makeFakeAccountData = (): AddAccountParams => ({
+const makeFakeAccountData = (): IAddAccount.Params => ({
   name: 'valid_name',
   email: 'valid_email',
   password: 'valid_password'
@@ -32,7 +32,7 @@ const makeHasher = (): IHasher => {
 
 const makeAddAccountRepository = (): IAddAccountRepository => {
   class AddAccountRepositoryStub implements IAddAccountRepository {
-    async add (accountData: AddAccountParams): Promise<AccountModel> {
+    async add (accountData: IAddAccount.Params): Promise<IAddAccount.Result> {
       return new Promise(resolve => resolve(makeFakeAccount()))
     }
   }

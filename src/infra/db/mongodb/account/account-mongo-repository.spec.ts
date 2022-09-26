@@ -1,5 +1,5 @@
+import { IAddAccountRepository } from '@/data/protocols/db/account/add-account-repository'
 import { Collection, ObjectId } from 'mongodb'
-import { AddAccountParams } from '../../../../domain/usecases/account/add-account'
 import { MongoHelper } from '../helpers/mongo-helper'
 import { AccountMongoRepository } from './account-mongo-repository'
 
@@ -7,7 +7,7 @@ const makeSut = (): AccountMongoRepository => {
   return new AccountMongoRepository()
 }
 
-const makeFakeAccount = (): AddAccountParams => ({
+const makeFakeAccount = (): IAddAccountRepository.Params => ({
   name: 'any_name',
   email: 'any_email@mail.com',
   password: 'any_password'

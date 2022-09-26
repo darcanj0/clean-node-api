@@ -1,4 +1,4 @@
-import { AccountModel, AddAccountParams, IAddAccount, IValidation } from '../../../controllers/user/signup/signup-controller-protocols'
+import { AccountModel, IAddAccount, IValidation } from '../../../controllers/user/signup/signup-controller-protocols'
 import { EmailInUseError, MissingParamError, ServerError } from '../../../errors'
 import { badRequest, forbidden, ok, serverError } from '../../../helpers/http/http-helper'
 import { AuthenticationParams, IAuthentication } from '../login/login-controller-protocols'
@@ -22,7 +22,7 @@ const makeValidation = (): IValidation => {
 
 const makeAddAccount = (): IAddAccount => {
   class AddAccountStub implements IAddAccount {
-    async add (account: AddAccountParams): Promise<AccountModel> {
+    async add (account: IAddAccount.Params): Promise<AccountModel> {
       const fakeAccount = makeFakeAccount()
       return new Promise(resolve => resolve(fakeAccount))
     }
