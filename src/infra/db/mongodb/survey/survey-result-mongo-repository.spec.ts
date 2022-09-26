@@ -2,14 +2,14 @@ import { Collection } from 'mongodb'
 import { MongoHelper } from '../helpers/mongo-helper'
 import MockDate from 'mockdate'
 import { SurveyResultMongoRepository } from './survey-result-mongo-repository'
-import { SurveyModel } from '@/domain/models/survey'
-import { AccountModel } from '@/domain/models/account'
+import { IAddAccountRepository } from '../../../../data/protocols/db/account/add-account-repository'
+import { ICreateSurveyRepository } from '../../../../data/protocols/db/survey/create-survey-repository'
 
 let surveyCollection: Collection
 let surveyResultCollection: Collection
 let accountCollection: Collection
 
-const makeFakeSurvey = async (): Promise<SurveyModel> => {
+const makeFakeSurvey = async (): Promise<ICreateSurveyRepository.Result> => {
   const surveyData = {
     question: 'any_question',
     answers: [{ image: 'any_image', answer: 'any_answer' }, { answer: 'another_answer' }],
@@ -19,7 +19,7 @@ const makeFakeSurvey = async (): Promise<SurveyModel> => {
   return MongoHelper.map(await surveyCollection.findOne({ _id: insertedId }))
 }
 
-const makeFakeAccount = async (): Promise<AccountModel> => {
+const makeFakeAccount = async (): Promise<IAddAccountRepository.Result> => {
   const accountData = {
     name: 'any_name',
     email: 'any_email@mail.com',
