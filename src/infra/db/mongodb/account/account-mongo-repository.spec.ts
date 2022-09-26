@@ -80,7 +80,7 @@ describe('Account Mongo Repository', () => {
         password: 'any_password',
         accessToken: 'any_token'
       })
-      const account = await sut.loadByToken('any_token')
+      const account = await sut.loadByToken({ token: 'any_token' })
       expect(account).toBeTruthy()
       expect(account?.id).toBeTruthy()
       expect(account?.name).toBe('any_name')
@@ -97,7 +97,7 @@ describe('Account Mongo Repository', () => {
         accessToken: 'any_token',
         role: 'any_role'
       })
-      const account = await sut.loadByToken('any_token', 'any_role')
+      const account = await sut.loadByToken({ token: 'any_token', role: 'any_role' })
       expect(account).toBeTruthy()
       expect(account?.id).toBeTruthy()
       expect(account?.name).toBe('any_name')
@@ -114,7 +114,7 @@ describe('Account Mongo Repository', () => {
         accessToken: 'any_token',
         role: 'admin'
       })
-      const account = await sut.loadByToken('any_token', 'admin')
+      const account = await sut.loadByToken({ token: 'any_token', role: 'any_role' })
       expect(account).toBeTruthy()
       expect(account?.id).toBeTruthy()
       expect(account?.name).toBe('any_name')
@@ -130,7 +130,7 @@ describe('Account Mongo Repository', () => {
         password: 'any_password',
         accessToken: 'any_token'
       })
-      const account = await sut.loadByToken('any_token', 'admin')
+      const account = await sut.loadByToken({ token: 'any_token', role: 'admin' })
       expect(account).toBeFalsy()
     })
 
@@ -143,7 +143,7 @@ describe('Account Mongo Repository', () => {
         accessToken: 'any_token',
         role: 'admin'
       })
-      const account = await sut.loadByToken('any_token')
+      const account = await sut.loadByToken({ token: 'any_token' })
       expect(account).toBeTruthy()
       expect(account?.id).toBeTruthy()
       expect(account?.name).toBe('any_name')
@@ -153,7 +153,7 @@ describe('Account Mongo Repository', () => {
 
     test('Should return null if loadByToken fails', async () => {
       const sut = makeSut()
-      const account = await sut.loadByToken('any_token')
+      const account = await sut.loadByToken({ token: 'any_token' })
       expect(account).toBeFalsy()
     })
   })

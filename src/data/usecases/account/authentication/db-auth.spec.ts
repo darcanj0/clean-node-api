@@ -1,21 +1,21 @@
-import { AuthenticationParams, AccountModel, ILoadAccountByEmailRepository, IHashComparer, IEncrypter, IUpdateAccessTokenRepository } from './db-auth-protocols'
+import { ILoadAccountByEmailRepository, IHashComparer, IEncrypter, IUpdateAccessTokenRepository, IAuthentication } from './db-auth-protocols'
 import { DbAuthentication } from './db-auth'
 
-const makeFakeAccount = (): AccountModel => ({
+const makeFakeAccount = (): ILoadAccountByEmailRepository.Result => ({
   id: 'any_id',
   email: 'any_email@mail.com',
   password: 'hashed_password',
   name: 'any_name'
 })
 
-const makeFakeAuthentication = (): AuthenticationParams => ({
+const makeFakeAuthentication = (): IAuthentication.Params => ({
   email: 'any_email@mail.com',
   password: 'any_password'
 })
 
 const makeLoadAccountByEmailRepositoryStub = (): ILoadAccountByEmailRepository => {
   class LoadAccountByEmailRepositoryStub implements ILoadAccountByEmailRepository {
-    async loadByEmail (email: string): Promise<AccountModel> {
+    async loadByEmail (email: ILoadAccountByEmailRepository.Params): Promise<ILoadAccountByEmailRepository.Result> {
       return new Promise(resolve => resolve(makeFakeAccount()))
     }
   }

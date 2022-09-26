@@ -1,7 +1,7 @@
 import { AccountModel, IAddAccount, IValidation } from '../../../controllers/user/signup/signup-controller-protocols'
 import { EmailInUseError, MissingParamError, ServerError } from '../../../errors'
 import { badRequest, forbidden, ok, serverError } from '../../../helpers/http/http-helper'
-import { AuthenticationParams, IAuthentication } from '../login/login-controller-protocols'
+import { IAuthentication } from '../login/login-controller-protocols'
 import { SignUpController } from './signup-controller'
 
 type ISutTypes = {
@@ -32,7 +32,7 @@ const makeAddAccount = (): IAddAccount => {
 
 const makeAuthentication = (): IAuthentication => {
   class AuthenticationStub implements IAuthentication {
-    async auth (authentication: AuthenticationParams): Promise<string> {
+    async auth (authentication: IAuthentication.Params): Promise<IAuthentication.Result> {
       return new Promise(resolve => resolve('any_token'))
     }
   }

@@ -1,5 +1,5 @@
 import { DbAddAccount } from '../add-account/db-add-account'
-import { AccountModel, IHasher, IAddAccountRepository, ILoadAccountByEmailRepository, IAddAccount } from './db-add-account-protocols'
+import { IHasher, IAddAccountRepository, ILoadAccountByEmailRepository, IAddAccount } from './db-add-account-protocols'
 
 type ISutTypes = {
   sut: DbAddAccount
@@ -41,7 +41,7 @@ const makeAddAccountRepository = (): IAddAccountRepository => {
 
 const makeLoadAccountByEmailRepositoryStub = (): ILoadAccountByEmailRepository => {
   class LoadAccountByEmailRepositoryStub implements ILoadAccountByEmailRepository {
-    async loadByEmail (email: string): Promise<AccountModel | null> {
+    async loadByEmail (email: ILoadAccountByEmailRepository.Params): Promise<ILoadAccountByEmailRepository.Result> {
       return new Promise(resolve => resolve(null))
     }
   }

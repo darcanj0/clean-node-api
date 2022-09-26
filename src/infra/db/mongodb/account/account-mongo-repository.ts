@@ -3,7 +3,6 @@ import { IAddAccountRepository } from '../../../../data/protocols/db/account/add
 import { ILoadAccountByEmailRepository } from '../../../../data/protocols/db/account/load-account-by-email-repository'
 import { IUpdateAccessTokenRepository } from '../../../../data/protocols/db/account/update-access-token-repository'
 import { ILoadAccountByTokenRepository } from '../../../../data/usecases/account/load-account-by-token/db-load-account-by-token-protocols'
-import { AccountModel } from '../../../../domain/models/account'
 import { MongoHelper } from '../helpers/mongo-helper'
 
 export class AccountMongoRepository implements IAddAccountRepository, ILoadAccountByEmailRepository, IUpdateAccessTokenRepository, ILoadAccountByTokenRepository {
@@ -16,7 +15,7 @@ export class AccountMongoRepository implements IAddAccountRepository, ILoadAccou
     return MongoHelper.map(await accountCollection.findOne({ _id: id }))
   }
 
-  async loadByEmail (email: string): Promise<AccountModel> {
+  async loadByEmail (email: ILoadAccountByEmailRepository.Params): Promise<ILoadAccountByEmailRepository.Result> {
     const accountCollection = await MongoHelper.getCollection('accounts')
     const account = await accountCollection.findOne({ email })
     return account && MongoHelper.map(account)
@@ -27,7 +26,8 @@ export class AccountMongoRepository implements IAddAccountRepository, ILoadAccou
     await accountCollection.updateOne({ _id: new ObjectId(id) }, { $set: { accessToken: token } })
   }
 
-  async loadByToken (token: string, role?: string): Promise<AccountModel | null> {
+  async loadByToken (params: ILoadAccountByTokenRepository.Params): Promise<ILoadAccountByTokenRepository.Result> {
+    const { token, role } = params
     const accountCollection = await MongoHelper.getCollection('accounts')
     const account = await accountCollection.findOne({ accessToken: token, $or: [{ role }, { role: 'admin' }] })
     return account && MongoHelper.map(account)

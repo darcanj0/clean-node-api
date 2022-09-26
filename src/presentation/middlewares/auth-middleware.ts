@@ -18,7 +18,7 @@ export class AuthMiddleware implements IMiddleware {
     try {
       const { accessToken } = request
       if (accessToken) {
-        const account = await this.loadAccountByToken.load(accessToken, this.role)
+        const account = await this.loadAccountByToken.load({ token: accessToken, role: this.role })
         if (account) {
           return ok({ accountId: account.id })
         }

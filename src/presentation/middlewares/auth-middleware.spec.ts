@@ -17,7 +17,7 @@ const makeFakeRequest = (): AuthMiddleware.Request => ({
 
 const makeLoadAccountByTokenStub = (): ILoadAccountByToken => {
   class LoadAccountByTOkenStub implements ILoadAccountByToken {
-    async load (token: string, role?: string): Promise<AccountModel | null> {
+    async load (params: ILoadAccountByToken.Params): Promise<ILoadAccountByToken.Result> {
       return new Promise(resolve => resolve(makeFakeAccount()))
     }
   }
@@ -49,7 +49,7 @@ describe('AuthMiddleware', () => {
     const loadSpy = jest.spyOn(loadAccountByTokenStub, 'load')
     const httpRequest = makeFakeRequest()
     await sut.handle(httpRequest)
-    expect(loadSpy).toHaveBeenCalledWith('any_token', 'any_role')
+    expect(loadSpy).toHaveBeenCalledWith({ token: 'any_token', role: 'any_role' })
   })
 
   test('Should return 403 if LoadAccountByToken returns null', async () => {
