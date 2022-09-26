@@ -1,12 +1,10 @@
 import { SurveyModel } from '@/domain/models/survey'
 
-export interface SurveyAnswer {
-  image?: string
-  answer: string
+export interface ICreateSurvey {
+  create: (createSurveyData: ICreateSurvey.Params) => Promise<ICreateSurvey.Result>
 }
 
-export type CreateSurveyParams = Omit<SurveyModel, 'id'>
-
-export interface ICreateSurvey {
-  create: (createSurveyData: CreateSurveyParams) => Promise<any>
+export namespace ICreateSurvey {
+  export type Params = Omit<SurveyModel, 'id'>
+  export type Result = any
 }

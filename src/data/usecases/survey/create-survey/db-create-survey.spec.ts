@@ -1,8 +1,8 @@
 import { DbCreateSurvey } from './db-create-survey'
-import { CreateSurveyParams, ICreateSurveyRepository } from './db-create-survey-protocols'
+import { ICreateSurveyRepository, ICreateSurvey } from './db-create-survey-protocols'
 import MockDate from 'mockdate'
 
-const makeFakeSurveyData = (): CreateSurveyParams => ({
+const makeFakeSurveyData = (): ICreateSurvey.Params => ({
   question: 'any_question',
   answers: [{
     image: 'any_image',
@@ -13,7 +13,7 @@ const makeFakeSurveyData = (): CreateSurveyParams => ({
 
 const makeCreateSurveyRepositoryStub = (): ICreateSurveyRepository => {
   class CreateSurveyRepositoryStub implements ICreateSurveyRepository {
-    async add (data: CreateSurveyParams): Promise<any> {
+    async add (data: ICreateSurvey.Params): Promise<ICreateSurvey.Result> {
       return new Promise(resolve => resolve({}))
     }
   }

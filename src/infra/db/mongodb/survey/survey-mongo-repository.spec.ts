@@ -1,6 +1,6 @@
+import { ICreateSurveyRepository } from '@/data/protocols/db/survey/create-survey-repository'
 import MockDate from 'mockdate'
 import { Collection } from 'mongodb'
-import { CreateSurveyParams } from '../../../../domain/usecases/survey/create-survey'
 import { MongoHelper } from '../helpers/mongo-helper'
 import { SurveyMongoRepository } from './survey-mongo-repository'
 
@@ -8,7 +8,7 @@ const makeSut = (): SurveyMongoRepository => {
   return new SurveyMongoRepository()
 }
 
-const makeFakeSurveyData = (): CreateSurveyParams => ({
+const makeFakeSurveyData = (): ICreateSurveyRepository.Params => ({
   question: 'any_question',
   answers: [{ image: 'any_image', answer: 'any_answer' }],
   date: new Date()

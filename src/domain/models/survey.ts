@@ -1,4 +1,7 @@
-import { SurveyAnswer } from '../usecases/survey/create-survey'
+export type SurveyAnswer = {
+  answer: string
+  image?: string
+}
 
 export type SurveyModel = {
   id: string
