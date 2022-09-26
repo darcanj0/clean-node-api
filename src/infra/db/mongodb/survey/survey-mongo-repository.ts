@@ -24,7 +24,7 @@ export class SurveyMongoRepository implements ICreateSurveyRepository, ILoadSurv
     return formated
   }
 
-  async loadById (id: string): Promise<SurveyModel> {
+  async loadById (id: string): Promise<ILoadSurveyByIdRepository.Result> {
     const surveyCollection = await MongoHelper.getCollection('surveys')
     const isValidId = ObjectId.isValid(id)
     if (!isValidId) {

@@ -1,8 +1,8 @@
 import { DbLoadSurveyById } from './db-load-survey-by-id'
-import { ILoadSurveyByIdRepository, SurveyModel } from './db-load-survey-by-id-protocols'
+import { ILoadSurveyByIdRepository } from './db-load-survey-by-id-protocols'
 import MockDate from 'mockdate'
 
-const makeFakeSurvey = (): SurveyModel => (
+const makeFakeSurvey = (): ILoadSurveyByIdRepository.Result => (
   {
     id: 'any_id',
     question: 'any_question',
@@ -16,7 +16,7 @@ const makeFakeSurvey = (): SurveyModel => (
 
 const makeLoadSurveysRepositoryStub = (): ILoadSurveyByIdRepository => {
   class LoadSurveyByIdRepositoryStub implements ILoadSurveyByIdRepository {
-    async loadById (id: string): Promise<SurveyModel> {
+    async loadById (id: string): Promise<ILoadSurveyByIdRepository.Result> {
       return new Promise(resolve => resolve(makeFakeSurvey()))
     }
   }
