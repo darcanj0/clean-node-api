@@ -13,6 +13,10 @@ Conceitos aprendidos e aplicados nesse projeto:
 - Programação orientada a objetos
 - SOLID
 
+Tecnologias utilizadas:
+- GraphQL
+- Docker
+
 
 ## Instalação
 
