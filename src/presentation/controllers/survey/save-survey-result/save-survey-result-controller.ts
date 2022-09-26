@@ -1,5 +1,4 @@
 import {
-  HttpRequest,
   HttpResponse,
   IController,
   ILoadSurveyById,
@@ -16,11 +15,9 @@ export class SaveSurveyResultController implements IController {
     private readonly saveSurveyResult: ISaveSurveyResult
   ) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle (request: SaveSurveyResultController.Request): Promise<HttpResponse> {
     try {
-      const { surveyId } = httpRequest.params
-      const { answer } = httpRequest.body
-      const { accountId } = httpRequest
+      const { accountId, answer, surveyId } = request
       const survey = await this.loadSurveyById.loadById(surveyId)
       if (!survey) {
         return forbidden(new InvalidParamError('surveyId'))
@@ -40,5 +37,13 @@ export class SaveSurveyResultController implements IController {
     } catch (error) {
       return serverError(error)
     }
+  }
+}
+
+export namespace SaveSurveyResultController {
+  export type Request = {
+    surveyId: string
+    answer: string
+    accountId: string
   }
 }

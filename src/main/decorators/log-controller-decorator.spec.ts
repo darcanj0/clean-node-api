@@ -1,4 +1,4 @@
-import { HttpRequest, HttpResponse, IController } from '../../presentation/protocols'
+import { HttpResponse, IController } from '../../presentation/protocols'
 import { LogControllerDecorator } from './log-controller-decorator'
 import { ILogErrorRepository } from '../../data/protocols/db/log/log-error-repository'
 import { serverError, ok } from '../../presentation/helpers/http/http-helper'
@@ -10,13 +10,11 @@ type ISutTypes = {
   logErrorRepositoryStub: ILogErrorRepository
 }
 
-const makeFakeRequest = (): HttpRequest => ({
-  body: {
-    name: 'any_name',
-    email: 'any_email@mail.com',
-    password: 'any_password',
-    passwordConfirmation: 'any_password'
-  }
+const makeFakeRequest = (): any => ({
+  name: 'any_name',
+  email: 'any_email@mail.com',
+  password: 'any_password',
+  passwordConfirmation: 'any_password'
 })
 
 const makeFakeAccount = (): AccountModel => ({
@@ -34,7 +32,7 @@ const makeFakeServerError = (): HttpResponse => {
 
 const makeController = (): IController => {
   class ControllerStub implements IController {
-    async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+    async handle (httpRequest): Promise<HttpResponse> {
       const httpResponse = ok(makeFakeAccount())
       return new Promise(resolve => resolve(httpResponse))
     }

@@ -1,7 +1,6 @@
 import { AccountModel, AddAccountParams, IAddAccount, IValidation } from '../../../controllers/user/signup/signup-controller-protocols'
 import { EmailInUseError, MissingParamError, ServerError } from '../../../errors'
 import { badRequest, forbidden, ok, serverError } from '../../../helpers/http/http-helper'
-import { HttpRequest } from '../../../protocols/http'
 import { AuthenticationParams, IAuthentication } from '../login/login-controller-protocols'
 import { SignUpController } from './signup-controller'
 
@@ -57,13 +56,11 @@ const makeFakeAccount = (): AccountModel => ({
   password: 'valid_password'
 })
 
-const makeFakeRequest = (): HttpRequest => ({
-  body: {
-    name: 'any_name',
-    email: 'any_email@mail.com',
-    password: 'any_password',
-    passwordConfirmation: 'any_password'
-  }
+const makeFakeRequest = (): SignUpController.Request => ({
+  name: 'any_name',
+  email: 'any_email@mail.com',
+  password: 'any_password',
+  passwordConfirmation: 'any_password'
 })
 
 describe('SignUp Controller', () => {
@@ -101,7 +98,7 @@ describe('SignUp Controller', () => {
     const validateSpy = jest.spyOn(validationStub, 'validate')
     const httpRequest = makeFakeRequest()
     await sut.handle(httpRequest)
-    expect(validateSpy).toHaveBeenCalledWith(httpRequest.body)
+    expect(validateSpy).toHaveBeenCalledWith(httpRequest)
   })
 
   test('Should return 400 if validation returns an error', async () => {

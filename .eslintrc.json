@@ -11,6 +11,8 @@
       "@typescript-eslint/no-invalid-void-type": "off",
       "no-return-assign": "off",
       "@typescript-eslint/return-await": "off",
-      "@typescript-eslint/consistent-type-definitions": "off"
+      "@typescript-eslint/consistent-type-definitions": "off",
+      "@typescript-eslint/no-namespace": "off",
+      "import/export": "off"
     }
 }

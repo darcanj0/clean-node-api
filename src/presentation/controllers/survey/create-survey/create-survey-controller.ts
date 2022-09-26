@@ -1,4 +1,4 @@
-import { HttpRequest, HttpResponse } from '../../../protocols'
+import { HttpResponse } from '../../../protocols'
 import { badRequest, serverError, noContent, IController, IValidation, ICreateSurvey } from './create-survey-controller-protocols'
 
 export class CreateSurveyController implements IController {
@@ -7,16 +7,28 @@ export class CreateSurveyController implements IController {
     private readonly createSurvey: ICreateSurvey
   ) {}
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle (request: CreateSurveyController.Request): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate(httpRequest.body)
+      const error = this.validation.validate(request)
       if (error !== null) {
         return badRequest(error)
       }
-      await this.createSurvey.create({ ...httpRequest.body, date: new Date() })
+      await this.createSurvey.create({ ...request, date: new Date() })
       return noContent()
     } catch (error) {
       return serverError(error)
     }
+  }
+}
+
+export namespace CreateSurveyController {
+  export type Request = {
+    question: string
+    answers: Answer[]
+  }
+
+  type Answer = {
+    image?: string
+    answer: string
   }
 }

@@ -1,10 +1,9 @@
 import MockDate from 'mockdate'
-import { HttpRequest } from '../../../protocols/http'
 import { LoadSurveysController } from './load-surveys-controller'
 import { ILoadSurveys, ok, serverError, noContent, SurveyModel } from './load-surveys-controller-protocols'
 
-const makeFakeHttpRequest = (): HttpRequest => ({
-  body: {}
+const makeFakeHttpRequest = (): LoadSurveysController.Request => ({
+  accountId: 'any_account_id'
 })
 
 const makeFakeSurveys = (): SurveyModel[] => ([
@@ -59,8 +58,8 @@ describe('LoadSurveysController', () => {
   test('Should call LoadSurveysUseCase', async () => {
     const { sut, loadSurveysStub } = makeSut()
     const useCaseSpy = jest.spyOn(loadSurveysStub, 'loadSurveys')
-    const httpRequest: HttpRequest = makeFakeHttpRequest()
-    await sut.handle(httpRequest)
+    const request = makeFakeHttpRequest()
+    await sut.handle(request)
     expect(useCaseSpy).toHaveBeenCalled()
   })
 
@@ -69,15 +68,15 @@ describe('LoadSurveysController', () => {
     jest.spyOn(loadSurveysStub, 'loadSurveys').mockReturnValueOnce(
       new Promise((resolve, reject) => reject(new Error()))
     )
-    const httpRequest = makeFakeHttpRequest()
-    const httpResponse = await sut.handle(httpRequest)
+    const request = makeFakeHttpRequest()
+    const httpResponse = await sut.handle(request)
     expect(httpResponse).toEqual(serverError(new Error()))
   })
 
   test('Should return 200 on LoadSurveysUseCase success', async () => {
     const { sut } = makeSut()
-    const httpRequest = makeFakeHttpRequest()
-    const httpResponse = await sut.handle(httpRequest)
+    const request = makeFakeHttpRequest()
+    const httpResponse = await sut.handle(request)
     expect(httpResponse).toEqual(ok(makeFakeSurveys()))
   })
 
@@ -86,8 +85,8 @@ describe('LoadSurveysController', () => {
     jest.spyOn(loadSurveysStub, 'loadSurveys').mockReturnValueOnce(
       new Promise((resolve) => resolve([]))
     )
-    const httpRequest = makeFakeHttpRequest()
-    const httpResponse = await sut.handle(httpRequest)
+    const request = makeFakeHttpRequest()
+    const httpResponse = await sut.handle(request)
     expect(httpResponse).toEqual(noContent())
   })
 })
